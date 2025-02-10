@@ -1,0 +1,42 @@
+classes:
+    Livro:
+        - atributos:
+            ISBN
+            titulo
+            autor
+            publicação
+            genero
+        - metodos:
+            é responsabilidade do livro cadastrar livros?
+    Usuário:
+        - atributos:
+            id
+            nome
+            lista de livros
+        - metodos:
+            emprestarLivro
+            devolverLivro
+    emprestimo?:
+        - atributos:
+            data do emprestimo:
+            usuário responsavel
+
+
+
+Controllers:
+    UIController: todos os metodos que façam alguma coisa com java fx
+    IOController: tudo que for fazer entrada e saida?, a serialização deve ser implementada aqui certamente
+    PluginController: tudo relacionado a inicialização e necessario para que os plugins funcionem
+    AuthenticationController: parece sem proposito
+
+    duvidas:
+    - as classes livro e Usuário, quem se responsabilizará por elas?
+    - que tipo de input e output o IO controller deve fazer? os plugins tambem recebem entradas
+    - é justo ter um controller para livros e outro pra usuário?
+    - se não, onde por exemplo, um livro seria cadastrado? um plugin? em qual controller?
+    - onde as informações guardadas sobre o sistema devem estar guardadas? por exemplo: onde ficam todos os usuários cadastrados no codigo? e todos os livros? quem armazena essas informações?
+
+
+
+    epifanias:
+        - os livros emprestados podem ficar armazenados todos em um lugar e o usuário guarda apenas as chaves para o map do livro que ele pegou emprestado
