@@ -24,26 +24,28 @@ public class UserController implements IUserController{
         AllUsers.put(name, user);
     }
 
-    public void borrowBook(String userName, String title) {
+    public void borrowBook(String userName, String title) throws Exception {
         IUser user = AllUsers.get(userName);
         
         if(user == null){
-            System.out.println("User not found");
-            return;
+            throw new Exception("User not found");
         }
 
-        try{
             IBook book = bookController.searchBook(title);
             bookController.reserveBook(title);
             user.addBook(book);
-        }catch(Exception e){
-            System.out.println(e.getMessage());    
-        }
     }
 
-    public void returnBook(String userName, String title) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'returnBook'");
+    public void returnBook(String userName, String title) throws Exception{
+        IUser user = AllUsers.get(userName);
+        
+        if(user == null){
+            throw new Exception("User not found");
+        }
+
+        IBook book = bookController.searchBook(title);
+        bookController.unreserveBook(title);
+        user.removeBook(book);
     }
     
 }
