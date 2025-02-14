@@ -1,5 +1,6 @@
 package br.edu.ifba.inf008.shell;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -8,9 +9,11 @@ import br.edu.ifba.inf008.interfaces.IBook;
 
 public class BookController implements IBookController{
     private Map<String, IBook> Allbooks;
+    private Map<String, String> ReservedBooks;
 
     public BookController(){
         this.Allbooks = new TreeMap<String, IBook>();
+        this.ReservedBooks = new HashMap<String, String>();
     }
 
     public void registerBook(String title, String author, String isbn, int year, String gender) throws UnsupportedOperationException{
