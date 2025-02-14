@@ -25,7 +25,7 @@ public class BookController implements IBookController{
     public IBook searchBook(String title) throws Exception {
         IBook book = Allbooks.get(title);
 
-        if(book == null || book.isAvailable()){
+        if(book == null || !book.isAvailable()){
             throw new Exception("Book not found");
         }
 
@@ -35,7 +35,7 @@ public class BookController implements IBookController{
     public void reserveBook(String title) throws Exception {
         IBook book = Allbooks.get(title);
 
-        if(book == null || book.isAvailable()){
+        if(book == null || !book.isAvailable()){
             throw new Exception("Book not found");
         }
 
@@ -45,7 +45,7 @@ public class BookController implements IBookController{
     public void unreserveBook(String title) throws Exception{
         IBook book = Allbooks.get(title);
 
-        if(book == null || book.isAvailable()){
+        if(book == null || !book.isAvailable()){
             throw new Exception("Book not found");
         }
 
