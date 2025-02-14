@@ -31,9 +31,9 @@ public class UserController implements IUserController{
             throw new Exception("User not found");
         }
 
-            IBook book = bookController.searchBook(title);
-            bookController.reserveBook(title);
-            user.addBook(book);
+        IBook book = bookController.searchBook(title);
+        bookController.reserveBook(title);
+        user.addBook(book);
     }
 
     public void returnBook(String userName, String title) throws Exception{
