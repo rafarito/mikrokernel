@@ -7,24 +7,45 @@ import br.edu.ifba.inf008.interfaces.IUIController;
 import javafx.scene.control.MenuItem;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.paint.Color;
+import javafx.scene.Node;
 
 public class UserPlugin implements IPlugin
 {
     public boolean init() {
         IUIController uiController = ICore.getInstance().getUIController();
 
-        MenuItem menuItem = uiController.createMenuItem("Menu 1", "My Menu Item");
-        menuItem.setOnAction(new EventHandler<ActionEvent>() {
+        MenuItem registerUserItem = uiController.createMenuItem("User", "Register User");
+        registerUserItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                System.out.println("I've been clicked!");
+                registerUser();
+            }
+        });
+        MenuItem borrowBookItem = uiController.createMenuItem("User", "Borrow book");
+        borrowBookItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                // uiController.createMenuItem("User", "User registered");
+            }
+        });
+        MenuItem returnBookItem = uiController.createMenuItem("User", "Return book");
+        returnBookItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                // uiController.createMenuItem("User", "User registered");
             }
         });
 
-        uiController.createTab("new tab", new Rectangle(200,200, Color.LIGHTSTEELBLUE));
+        // uiController.createTab("new tab", new Rectangle(200,200, Color.LIGHTSTEELBLUE));
 
         return true;
     }
+
+    private void registerUser() {
+        IUIController uiController = ICore.getInstance().getUIController();
+        Node form = uiController.createUserForm();
+        uiController.appendField(form, "Username");
+        uiController.setFormScene("Register", form);
+    }
+
 }

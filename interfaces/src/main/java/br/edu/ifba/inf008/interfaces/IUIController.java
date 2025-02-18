@@ -5,6 +5,9 @@ import javafx.scene.Node;
 
 public interface IUIController
 {
-    public abstract MenuItem createMenuItem(String menuText, String menuItemText);
-    public abstract boolean createTab(String tabText, Node contents);
+    public MenuItem createMenuItem(String menuText, String menuItemText);
+    public boolean createTab(String tabText, Node contents);
+    public void setFormScene(String title, Node contents);
+    public Node createUserForm();
+    public Node appendField(Node baseForm, String fieldLabel);
 }
