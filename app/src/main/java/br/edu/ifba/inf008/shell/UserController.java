@@ -31,21 +31,20 @@ public class UserController implements IUserController{
             throw new Exception("User not found");
         }
 
-        IBook book = bookController.searchBook(title);
         bookController.reserveBook(title);
-        user.addBook(book);
+        user.addBook(bookController.reserveBook(title));
     }
 
-    public void returnBook(String userName, String title) throws Exception{
+    public void returnBook(String userName, int reserveId) throws Exception{
         IUser user = AllUsers.get(userName);
         
         if(user == null){
             throw new Exception("User not found");
         }
 
-        IBook book = bookController.searchBook(title);
-        bookController.unreserveBook(title);
-        user.removeBook(book);
+        // IBook book = bookController.searchBook(title);
+        bookController.unreserveBook(reserveId);
+        user.removeBook(reserveId);
     }
     
 }
