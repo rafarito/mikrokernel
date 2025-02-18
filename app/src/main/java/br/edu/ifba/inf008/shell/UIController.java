@@ -3,7 +3,7 @@ package br.edu.ifba.inf008.shell;
 import br.edu.ifba.inf008.interfaces.IUIController;
 
 import br.edu.ifba.inf008.interfaces.ICore;
-import br.edu.ifba.inf008.shell.PluginController;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.application.Application;
@@ -13,13 +13,10 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.application.Platform;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tab;
