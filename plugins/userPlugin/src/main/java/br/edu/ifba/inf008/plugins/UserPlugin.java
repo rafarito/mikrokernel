@@ -10,7 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 
-public class MyPlugin implements IPlugin
+public class UserPlugin implements IPlugin
 {
     public boolean init() {
         IUIController uiController = ICore.getInstance().getUIController();
