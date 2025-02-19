@@ -35,7 +35,7 @@ Controllers:
     - é justo ter um controller para livros e outro pra usuário?
     - se não, onde por exemplo, um livro seria cadastrado? um plugin? em qual controller?
     - onde as informações guardadas sobre o sistema devem estar guardadas? por exemplo: onde ficam todos os usuários cadastrados no codigo? e todos os livros? quem armazena essas informações?
-
+    - Eu devo permitir o cadastro de um livro sem todas as informações?
 
 
     epifanias:
