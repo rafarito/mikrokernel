@@ -19,10 +19,10 @@ public class UserController implements IUserController{
         AllUsers = new TreeMap<String, IUser>();
     }
 
-    public void registerUser(String name) throws Exception {
+    public void registerUser(String name) throws UnsupportedOperationException {
         IUser user = new User(name);
         if(AllUsers.containsKey(name)){
-            throw new Exception("User already exists");
+            throw new UnsupportedOperationException("User already exists");
         }
         AllUsers.put(name, user);
     }

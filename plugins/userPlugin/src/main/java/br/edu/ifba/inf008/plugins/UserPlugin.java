@@ -59,7 +59,7 @@ public class UserPlugin implements IPlugin
                             try {
                                 ICore.getInstance().getUserController().registerUser(value);
                                 uiController.createAlert("User registered", "User registered", "User registered successfully");
-                            } catch (Exception ex) {
+                            } catch (UnsupportedOperationException ex) {
                                 uiController.createAlert("Error", "One error ocourred",  ex.getMessage(), AlertType.ERROR);
                             }
                         }
