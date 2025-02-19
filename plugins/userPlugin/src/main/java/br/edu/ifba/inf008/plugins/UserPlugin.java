@@ -43,7 +43,7 @@ public class UserPlugin implements IPlugin
 
     private void registerUser() {
         IUIController uiController = ICore.getInstance().getUIController();
-        Node form = uiController.createUserForm();
+        Node form = uiController.createForm();
         uiController.appendField(form, "Username");    
         uiController.setFormScene("Register User", form, new EventHandler<ActionEvent>() {
         @Override
