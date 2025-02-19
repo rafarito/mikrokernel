@@ -3,10 +3,13 @@ package br.edu.ifba.inf008.shell;
 import br.edu.ifba.inf008.interfaces.IUIController;
 
 import br.edu.ifba.inf008.interfaces.ICore;
-
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Menu;
@@ -87,16 +90,20 @@ public class UIController extends Application implements IUIController
         return menuItem;
     }
 
-    public boolean createTab(String tabText, Node contents) {
+    public Tab createTab(String tabText, Node contents) {
         Tab tab = new Tab();
         tab.setText(tabText);
         tab.setContent(contents);
         tabPane.getTabs().add(tab);
 
-        return true;
+        return tab;
     }
 
-    public void setFormScene(String title, Node contents) {
+    public void closeTab(Tab tab) {
+        tabPane.getTabs().remove(tab);
+    }
+
+    public Tab setFormScene(String title, Node contents, EventHandler<ActionEvent> submitHandler) {
 
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
@@ -111,9 +118,10 @@ public class UIController extends Application implements IUIController
         gridPane.add(contents, 0, 1, 2, 1);
 
         Button submitButton = new Button("Submit");
+        submitButton.setOnAction(submitHandler);
         gridPane.add(submitButton, 0, 2, 2, 1);
 
-        createTab(title, gridPane);
+        return createTab(title, gridPane);
     }
 
     public Node createUserForm() {
@@ -132,11 +140,10 @@ public class UIController extends Application implements IUIController
         }
         GridPane form = (GridPane) baseForm;
         
-        // Determine the maximum row index currently used
         int maxRow = -1;
         for (Node child : form.getChildren()) {
             Integer row = GridPane.getRowIndex(child);
-            // If the row index is null, assume 0
+            
             if (row == null) {
                 row = 0;
             }
@@ -155,5 +162,21 @@ public class UIController extends Application implements IUIController
         form.add(newTextField, 1, newRow);
         
         return form;
+    }
+
+    public void createAlert(String title, String header, String message) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    
+    public void createAlert(String title, String header, String message, AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
