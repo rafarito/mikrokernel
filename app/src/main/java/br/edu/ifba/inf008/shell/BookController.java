@@ -1,6 +1,8 @@
 package br.edu.ifba.inf008.shell;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
@@ -66,5 +68,25 @@ public class BookController implements IBookController{
 
         reservedBooks.remove(reserveId);
         book.unreserve();
+    }
+
+    public List<List<String>> toFieldList(){
+        List<List<String>> books = new ArrayList<List<String>>();
+
+        for(IBook book : Allbooks.values()){
+            if(!book.isAvailable()){
+                continue;
+            }
+            List<String> bookData = new ArrayList<String>();
+            bookData.add(book.getTitle());
+            bookData.add(book.getAuthor());
+            bookData.add(book.getIsbn());
+            bookData.add(Integer.toString(book.getYear()));
+            bookData.add(book.getGender());
+
+            books.add(bookData);
+        }
+
+        return books;
     }
 }

@@ -3,6 +3,9 @@ package br.edu.ifba.inf008.plugins;
 import br.edu.ifba.inf008.interfaces.IPlugin;
 import br.edu.ifba.inf008.interfaces.ICore;
 import br.edu.ifba.inf008.interfaces.IUIController;
+
+import java.util.List;
+
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -23,11 +26,18 @@ public class BookPlugin implements IPlugin
                 registerBook();
             }
         });
-        MenuItem borrowBookItem = uiController.createMenuItem("Book", "Borrow book");
-        borrowBookItem.setOnAction(new EventHandler<ActionEvent>() {
+        MenuItem searchBookItem = uiController.createMenuItem("Book", "Search book");
+        searchBookItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                // uiController.createMenuItem("Book", "Book registered");
+                searchBook();
+            }
+        });
+        MenuItem listBookItem = uiController.createMenuItem("Book", "List books");
+        listBookItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                listBooks();
             }
         });
         MenuItem returnBookItem = uiController.createMenuItem("Book", "Return book");
@@ -43,7 +53,7 @@ public class BookPlugin implements IPlugin
 
     private void registerBook(){
         IUIController uiController = ICore.getInstance().getUIController();
-        Node form = uiController.createUserForm();
+        Node form = uiController.createForm();
         uiController.appendField(form, "ISBN"); 
         uiController.appendField(form, "Title"); 
         uiController.appendField(form, "Author"); 
@@ -77,5 +87,42 @@ public class BookPlugin implements IPlugin
                 }
             }
         });
+    }
+
+    private void searchBook(){
+        IUIController uiController = ICore.getInstance().getUIController();
+        Node form = uiController.createForm();
+        uiController.appendField(form, "Title"); 
+        uiController.setFormScene("Search Book", form, new EventHandler<ActionEvent>() {
+        @Override
+            public void handle(ActionEvent e) {
+                if (form instanceof GridPane) {
+                    GridPane grid = (GridPane) form;
+                    String title = null;
+
+                    for (Node node : grid.getChildren()) {
+                        if (node instanceof TextField) {
+                            TextField textField = (TextField) node;
+                            title = textField.getText();
+                        }
+                    }
+
+                    try {
+                        ICore.getInstance().getBookController().searchBook(title);
+                        uiController.createAlert("Book found", "Book found", "Book found successfully");
+                    } catch (Exception ex) {
+                        uiController.createAlert("Error", "One error ocourred", ex.getMessage(), AlertType.ERROR);
+                    }
+                }
+            }
+        });
+    }
+
+    private void listBooks(){
+        IUIController uiController = ICore.getInstance().getUIController();
+        List<List<String>> books = ICore.getInstance().getBookController().toFieldList();
+        uiController.listItems(books);
+
+        
     }
 }

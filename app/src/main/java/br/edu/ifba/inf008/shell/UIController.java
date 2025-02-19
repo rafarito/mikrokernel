@@ -2,7 +2,10 @@ package br.edu.ifba.inf008.shell;
 
 import br.edu.ifba.inf008.interfaces.IUIController;
 
+import java.util.List;
+
 import br.edu.ifba.inf008.interfaces.ICore;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -124,7 +127,7 @@ public class UIController extends Application implements IUIController
         return createTab(title, gridPane);
     }
 
-    public Node createUserForm() {
+    public Node createForm() {
         GridPane form = new GridPane();
         form.setAlignment(Pos.CENTER);
         form.setHgap(10);
@@ -178,5 +181,25 @@ public class UIController extends Application implements IUIController
         alert.setHeaderText(header);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public Tab listItems(List<List<String>> items){
+        GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.setPadding(new Insets(25, 25, 25, 25));
+
+        int i = 0;
+        for (List<String> item : items) {
+            int j = 0;
+            for (String field : item) {
+                Text text = new Text(field);
+                gridPane.add(text, j++, i);
+            }
+            i++;
+        }
+
+        return createTab("List", gridPane);
     }
 }
