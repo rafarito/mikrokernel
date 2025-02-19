@@ -11,9 +11,71 @@ import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 
-public class UserPlugin implements IPlugin
+public class BookPlugin implements IPlugin
 {
     public boolean init() {
-        
+        IUIController uiController = ICore.getInstance().getUIController();
+
+        MenuItem registerBookItem = uiController.createMenuItem("Book", "Register Book");
+        registerBookItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                registerBook();
+            }
+        });
+        MenuItem borrowBookItem = uiController.createMenuItem("Book", "Borrow book");
+        borrowBookItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                // uiController.createMenuItem("Book", "Book registered");
+            }
+        });
+        MenuItem returnBookItem = uiController.createMenuItem("Book", "Return book");
+        returnBookItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                // uiController.createMenuItem("Book", "Book registered");
+            }
+        });
+
+        return true;
+    }
+
+    private void registerBook(){
+        IUIController uiController = ICore.getInstance().getUIController();
+        Node form = uiController.createUserForm();
+        uiController.appendField(form, "ISBN"); 
+        uiController.appendField(form, "Title"); 
+        uiController.appendField(form, "Author"); 
+        uiController.appendField(form, "Year"); 
+        uiController.appendField(form, "gender"); 
+        uiController.setFormScene("Register Book", form, new EventHandler<ActionEvent>() {
+        @Override
+            public void handle(ActionEvent e) {
+                if (form instanceof GridPane) {
+                    GridPane grid = (GridPane) form;
+                    int i = 0;
+                    String[] values = new String[5];
+
+                    for (Node node : grid.getChildren()) {
+                        if (node instanceof TextField) {
+                            TextField textField = (TextField) node;
+                            values[i++] = textField.getText();
+                        }
+                    }
+
+                    try {
+                        ICore.getInstance().getBookController().registerBook(values[1], values[2], values[0], Integer.parseInt(values[3]), values[4]);
+                        uiController.createAlert("Book registered", "Book registered", "Book registered successfully");
+                    } catch (UnsupportedOperationException ex) {
+                        uiController.createAlert("Error", "One error ocourred", ex.getMessage(), AlertType.ERROR);
+                    } catch (NumberFormatException ex) {
+                        uiController.createAlert("Error", "One error ocourred", "Year must be a number", AlertType.ERROR);
+                    } catch (Exception ex) {
+                        uiController.createAlert("Error", "One error ocourred", ex.getMessage(), AlertType.ERROR);
+                    }
+                }
+            }
+        });
     }
 }
