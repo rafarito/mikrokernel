@@ -38,8 +38,6 @@ public class UserPlugin implements IPlugin
             }
         });
 
-        // uiController.createTab("new tab", new Rectangle(200,200, Color.LIGHTSTEELBLUE));
-
         return true;
     }
 
@@ -47,7 +45,7 @@ public class UserPlugin implements IPlugin
         IUIController uiController = ICore.getInstance().getUIController();
         Node form = uiController.createUserForm();
         uiController.appendField(form, "Username");    
-        uiController.setFormScene("Register", form, new EventHandler<ActionEvent>() {
+        uiController.setFormScene("Register User", form, new EventHandler<ActionEvent>() {
         @Override
             public void handle(ActionEvent e) {
                 if (form instanceof GridPane) {
@@ -60,7 +58,7 @@ public class UserPlugin implements IPlugin
                                 ICore.getInstance().getUserController().registerUser(value);
                                 uiController.createAlert("User registered", "User registered", "User registered successfully");
                             } catch (UnsupportedOperationException ex) {
-                                uiController.createAlert("Error", "One error ocourred",  ex.getMessage(), AlertType.ERROR);
+                                uiController.createAlert("Error", "One error ocourred", ex.getMessage(), AlertType.ERROR);
                             }
                         }
                     }
