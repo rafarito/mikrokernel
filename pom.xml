@@ -12,6 +12,7 @@
         <module>interfaces</module>
         <module>app</module>
         <module>plugins/userPlugin</module>
+        <module>plugins/bookPlugin</module>
     </modules>
 
     <properties>
