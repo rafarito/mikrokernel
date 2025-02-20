@@ -101,6 +101,7 @@ public class UIController extends Application implements IUIController
         tab.setText(tabText);
         tab.setContent(contents);
         tabPane.getTabs().add(tab);
+        tabPane.getSelectionModel().select(tab);
 
         return tab;
     }
