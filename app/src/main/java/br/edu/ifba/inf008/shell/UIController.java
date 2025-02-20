@@ -41,7 +41,6 @@ public class UIController extends Application implements IUIController
     private ICore core;
     private MenuBar menuBar;
     private TabPane tabPane;
-    private Stage primaryStage;
     private static UIController uiController;
 
     public UIController() {
@@ -72,7 +71,6 @@ public class UIController extends Application implements IUIController
         Scene scene = new Scene(borderPane, 960, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
-        this.primaryStage = primaryStage;
     
         Core.getInstance().getPluginController().init();
     }
