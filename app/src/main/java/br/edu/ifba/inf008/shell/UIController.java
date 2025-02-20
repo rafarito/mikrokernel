@@ -11,6 +11,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -24,6 +27,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tab;
 import javafx.geometry.Insets;
@@ -183,23 +188,35 @@ public class UIController extends Application implements IUIController
         alert.showAndWait();
     }
 
-    public Tab listItems(List<List<String>> items){
-        GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.setPadding(new Insets(25, 25, 25, 25));
-
-        int i = 0;
-        for (List<String> item : items) {
-            int j = 0;
-            for (String field : item) {
-                Text text = new Text(field);
-                gridPane.add(text, j++, i);
+    public Tab listItems(List<List<String>> items, List<String> columnNames) {
+        TableView<ObservableList<String>> tableView = new TableView<>();
+        
+        if(items != null && !items.isEmpty()){
+            for (int col = 0; col < columnNames.size(); col++) {
+                final int colIndex = col;
+                TableColumn<ObservableList<String>, String> tableColumn = new TableColumn<>(columnNames.get(col));
+                tableColumn.setCellValueFactory(param -> {
+                    ObservableList<String> row = param.getValue();
+                    if(colIndex < row.size()){
+                        return new SimpleStringProperty(row.get(colIndex));
+                    } else {
+                        return new SimpleStringProperty("");
+                    }
+                });
+                tableView.getColumns().add(tableColumn);
             }
-            i++;
         }
-
-        return createTab("List", gridPane);
+        
+        ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
+        for (List<String> row : items) {
+            ObservableList<String> rowData = FXCollections.observableArrayList(row);
+            data.add(rowData);
+        }
+        tableView.setItems(data);
+        
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableView.setPrefSize(800, 400);
+        
+        return createTab("List", tableView);
     }
 }

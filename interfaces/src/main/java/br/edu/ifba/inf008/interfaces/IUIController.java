@@ -20,5 +20,5 @@ public interface IUIController
     public void createAlert(String title, String header, String message);
     public void createAlert(String title, String header, String message, AlertType type);
     public void closeTab(Tab tab);
-    public Tab listItems(List<List<String>> items);
+    public Tab listItems(List<List<String>> items, List<String> columnNames);
 }

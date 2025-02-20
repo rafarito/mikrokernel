@@ -4,6 +4,7 @@ import br.edu.ifba.inf008.interfaces.IPlugin;
 import br.edu.ifba.inf008.interfaces.ICore;
 import br.edu.ifba.inf008.interfaces.IUIController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.control.Alert.AlertType;
@@ -121,8 +122,12 @@ public class BookPlugin implements IPlugin
     private void listBooks(){
         IUIController uiController = ICore.getInstance().getUIController();
         List<List<String>> books = ICore.getInstance().getBookController().toFieldList();
-        uiController.listItems(books);
-
-        
+        List<String> columnNames = new ArrayList<String>();
+        columnNames.add("Title");
+        columnNames.add("Author");
+        columnNames.add("ISBN");
+        columnNames.add("Year");
+        columnNames.add("Gender");
+        uiController.listItems(books, columnNames);
     }
 }
