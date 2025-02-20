@@ -215,6 +215,7 @@ public class UIController extends Application implements IUIController
         tableView.setItems(data);
         
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableView.setPlaceholder(new Label("The table is empty."));
         tableView.setPrefSize(800, 400);
         
         return createTab("List", tableView);
