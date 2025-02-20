@@ -21,9 +21,15 @@ public class UserController implements IUserController{
 
     public void registerUser(String name) throws UnsupportedOperationException {
         IUser user = new User(name);
+        
         if(AllUsers.containsKey(name)){
             throw new UnsupportedOperationException("User already exists");
         }
+
+        if(name == null || name.trim().isEmpty()){
+            throw new UnsupportedOperationException("Username must be filled");
+        }
+
         AllUsers.put(name, user);
     }
 
