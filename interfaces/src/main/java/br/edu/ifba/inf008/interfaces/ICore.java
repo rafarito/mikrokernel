@@ -14,4 +14,7 @@ public abstract class ICore
     public abstract IUserController getUserController();
 
     protected static ICore instance = null;
+
+    public abstract void setBookController(IBookController object);
+    public abstract void setUserController(IUserController object);
 }

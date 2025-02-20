@@ -72,7 +72,13 @@ public class UIController extends Application implements IUIController
         primaryStage.setScene(scene);
         primaryStage.show();
     
+        Core.getInstance().getIOController().readAllPreviousData();
         Core.getInstance().getPluginController().init();
+    }
+
+    @Override
+    public void stop() {
+        Core.getInstance().getIOController().writeCurrentData();
     }
 
     public MenuItem createMenuItem(String menuText, String menuItemText) {

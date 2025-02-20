@@ -1,16 +1,15 @@
 package br.edu.ifba.inf008.shell;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.TreeMap;
 
-import br.edu.ifba.inf008.interfaces.IBook;
 import br.edu.ifba.inf008.interfaces.IBookController;
 import br.edu.ifba.inf008.interfaces.ICore;
-import br.edu.ifba.inf008.interfaces.IUIController;
 import br.edu.ifba.inf008.interfaces.IUser;
 import br.edu.ifba.inf008.interfaces.IUserController;
 
-public class UserController implements IUserController{
+public class UserController implements IUserController, Serializable{
 
     private Map<String, IUser> AllUsers;
     private IBookController bookController = ICore.getInstance().getBookController();
@@ -51,7 +50,6 @@ public class UserController implements IUserController{
             throw new Exception("User not found");
         }
 
-        // IBook book = bookController.searchBook(title);
         bookController.unreserveBook(reserveId);
         user.removeBook(reserveId);
     }

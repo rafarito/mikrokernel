@@ -1,12 +1,13 @@
 package br.edu.ifba.inf008.shell;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ifba.inf008.interfaces.IBook;
 import br.edu.ifba.inf008.interfaces.IUser;
 
-public class User implements IUser {
+public class User implements IUser, Serializable {
     private static int idCounter = 0;
     private int id;
     private String name;
@@ -16,6 +17,14 @@ public class User implements IUser {
         this.id = idCounter++;
         this.name = name;
         AlocatedBooks = new ArrayList<Integer>(5);
+    }
+
+    public static void setIdCounter(int idCounter) {
+        User.idCounter = idCounter;
+    }
+
+    public static int getIdCounter() {
+        return idCounter;
     }
 
     @Override

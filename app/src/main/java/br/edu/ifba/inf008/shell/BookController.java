@@ -1,5 +1,6 @@
 package br.edu.ifba.inf008.shell;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.stream.Stream;
 import br.edu.ifba.inf008.interfaces.IBookController;
 import br.edu.ifba.inf008.interfaces.IBook;
 
-public class BookController implements IBookController{
+public class BookController implements IBookController, Serializable{
     private Map<String, IBook> allbooks;
     private Map<Integer, IBook> reservedBooks;
 

@@ -56,4 +56,16 @@ public class Core extends ICore
     private IPluginController pluginController;
     private IBookController bookController;
     private IUserController userController;
+
+
+
+    @Override
+    public void setBookController(IBookController bookController) {
+        this.bookController = bookController;
+    }
+
+    @Override
+    public void setUserController(IUserController userController) {
+        this.userController = userController;
+    }
 }
