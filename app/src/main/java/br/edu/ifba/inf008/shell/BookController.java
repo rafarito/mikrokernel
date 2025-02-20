@@ -15,10 +15,12 @@ import br.edu.ifba.inf008.interfaces.IBook;
 public class BookController implements IBookController, Serializable{
     private Map<String, IBook> allbooks;
     private Map<Integer, IBook> reservedBooks;
+    private Map<String, String> registeredIsbns;
 
     public BookController(){
         this.allbooks = new TreeMap<String, IBook>();
         this.reservedBooks = new HashMap<Integer, IBook>();
+        this.registeredIsbns = new HashMap<String, String>();
     }
 
     public void registerBook(String title, String author, String isbn, int year, String gender) throws UnsupportedOperationException{
@@ -29,7 +31,11 @@ public class BookController implements IBookController, Serializable{
         if(allbooks.get(title) != null){
             throw new UnsupportedOperationException("Book already registered");
         }
+        if (registeredIsbns.get(isbn) != null) {
+            throw new UnsupportedOperationException("ISBN already registered");
+        }
 
+        registeredIsbns.put(isbn, title);
         IBook book = new Book(title, author, year, isbn, gender);
         allbooks.put(title, book);
     }
