@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
+import java.util.stream.Stream;
 
 import br.edu.ifba.inf008.interfaces.IBookController;
 import br.edu.ifba.inf008.interfaces.IBook;
@@ -20,6 +21,10 @@ public class BookController implements IBookController{
     }
 
     public void registerBook(String title, String author, String isbn, int year, String gender) throws UnsupportedOperationException{
+
+        if (Stream.of(title, author, isbn, gender).anyMatch(s -> s == null || s.trim().isEmpty())) {
+            throw new UnsupportedOperationException("All fields must be filled");
+        }
         if(allbooks.get(title) != null){
             throw new UnsupportedOperationException("Book already registered");
         }
