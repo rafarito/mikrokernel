@@ -89,4 +89,27 @@ public class BookController implements IBookController{
 
         return books;
     }
+
+    public List<List<String>> searchBooksBySubstring(String substring){
+        List<List<String>> results = new ArrayList<List<String>>();
+
+        String lowerSub = substring.toLowerCase();
+      
+        for (Map.Entry<String, IBook> entry : allbooks.entrySet()) {
+
+            if(entry.getKey().toLowerCase().contains(lowerSub) && entry.getValue().isAvailable()){
+                List<String> bookData = new ArrayList<String>();
+                IBook book = entry.getValue();
+                bookData.add(book.getTitle());
+                bookData.add(book.getAuthor());
+                bookData.add(book.getIsbn());
+                bookData.add(Integer.toString(book.getYear()));
+                bookData.add(book.getGender());
+
+                results.add(bookData);
+            }
+        }
+      
+        return results;
+    }
 }

@@ -95,7 +95,7 @@ public class BookPlugin implements IPlugin
         Node form = uiController.createForm();
         uiController.appendField(form, "Title"); 
         uiController.setFormScene("Search Book", form, new EventHandler<ActionEvent>() {
-        @Override
+            @Override
             public void handle(ActionEvent e) {
                 if (form instanceof GridPane) {
                     GridPane grid = (GridPane) form;
@@ -108,12 +108,7 @@ public class BookPlugin implements IPlugin
                         }
                     }
 
-                    try {
-                        ICore.getInstance().getBookController().searchBook(title);
-                        uiController.createAlert("Book found", "Book found", "Book found successfully");
-                    } catch (Exception ex) {
-                        uiController.createAlert("Error", "One error ocourred", ex.getMessage(), AlertType.ERROR);
-                    }
+                    listBooks(ICore.getInstance().getBookController().searchBooksBySubstring(title));
                 }
             }
         });
@@ -122,6 +117,18 @@ public class BookPlugin implements IPlugin
     private void listBooks(){
         IUIController uiController = ICore.getInstance().getUIController();
         List<List<String>> books = ICore.getInstance().getBookController().toFieldList();
+        List<String> columnNames = new ArrayList<String>();
+        columnNames.add("Title");
+        columnNames.add("Author");
+        columnNames.add("ISBN");
+        columnNames.add("Year");
+        columnNames.add("Gender");
+        uiController.listItems(books, columnNames);
+    }
+
+    private void listBooks(List<List<String>> books){
+        IUIController uiController = ICore.getInstance().getUIController();
+
         List<String> columnNames = new ArrayList<String>();
         columnNames.add("Title");
         columnNames.add("Author");

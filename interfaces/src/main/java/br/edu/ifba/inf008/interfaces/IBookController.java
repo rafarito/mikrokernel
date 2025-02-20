@@ -8,4 +8,5 @@ public interface IBookController {
     public int reserveBook(String title) throws Exception;
     public void unreserveBook(int reserveId) throws Exception;
     public List<List<String>> toFieldList();
+    public List<List<String>> searchBooksBySubstring(String substring);
 }
