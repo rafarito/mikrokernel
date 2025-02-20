@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.ifba.inf008.interfaces.IBook;
 import br.edu.ifba.inf008.interfaces.IUser;
 
 public class User implements IUser, Serializable {

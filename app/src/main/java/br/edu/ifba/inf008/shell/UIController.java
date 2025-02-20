@@ -4,8 +4,6 @@ import br.edu.ifba.inf008.interfaces.IUIController;
 
 import java.util.List;
 
-import br.edu.ifba.inf008.interfaces.ICore;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -38,7 +36,6 @@ import javafx.scene.Node;
 
 public class UIController extends Application implements IUIController
 {
-    private ICore core;
     private MenuBar menuBar;
     private TabPane tabPane;
     private static UIController uiController;
