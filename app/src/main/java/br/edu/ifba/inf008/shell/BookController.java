@@ -11,25 +11,25 @@ import br.edu.ifba.inf008.interfaces.IBookController;
 import br.edu.ifba.inf008.interfaces.IBook;
 
 public class BookController implements IBookController{
-    private Map<String, IBook> Allbooks;
+    private Map<String, IBook> allbooks;
     private Map<Integer, IBook> reservedBooks;
 
     public BookController(){
-        this.Allbooks = new TreeMap<String, IBook>();
+        this.allbooks = new TreeMap<String, IBook>();
         this.reservedBooks = new HashMap<Integer, IBook>();
     }
 
     public void registerBook(String title, String author, String isbn, int year, String gender) throws UnsupportedOperationException{
-        if(Allbooks.get(title) != null){
+        if(allbooks.get(title) != null){
             throw new UnsupportedOperationException("Book already registered");
         }
 
         IBook book = new Book(title, author, year, isbn, gender);
-        Allbooks.put(title, book);
+        allbooks.put(title, book);
     }
 
     public IBook searchBook(String title) throws Exception {
-        IBook book = Allbooks.get(title);
+        IBook book = allbooks.get(title);
 
         if(book == null || !book.isAvailable()){
             throw new Exception("Book not found");
@@ -39,7 +39,7 @@ public class BookController implements IBookController{
     }
 
     public int reserveBook(String title) throws Exception {
-        IBook book = Allbooks.get(title);
+        IBook book = allbooks.get(title);
 
         if(book == null || !book.isAvailable()){
             throw new Exception("Book not found");
@@ -73,7 +73,7 @@ public class BookController implements IBookController{
     public List<List<String>> toFieldList(){
         List<List<String>> books = new ArrayList<List<String>>();
 
-        for(IBook book : Allbooks.values()){
+        for(IBook book : allbooks.values()){
             if(!book.isAvailable()){
                 continue;
             }
