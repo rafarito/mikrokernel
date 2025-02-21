@@ -174,6 +174,37 @@ public class UIController extends Application implements IUIController
         return form;
     }
 
+    public Node appendField(Node baseForm, String fieldLabel, String placeHolder) {
+        if (!(baseForm instanceof GridPane)) {
+            return baseForm;
+        }
+        GridPane form = (GridPane) baseForm;
+        
+        int maxRow = -1;
+        for (Node child : form.getChildren()) {
+            Integer row = GridPane.getRowIndex(child);
+            
+            if (row == null) {
+                row = 0;
+            }
+            if (row > maxRow) {
+                maxRow = row;
+            }
+        }
+        int newRow = maxRow + 1;
+        
+        // Create the new label and text field
+        Label newLabel = new Label(fieldLabel + ":");
+        TextField newTextField = new TextField();
+        newTextField.setPromptText(placeHolder);
+        
+        // Add the new nodes to the GridPane at the new row
+        form.add(newLabel, 0, newRow);
+        form.add(newTextField, 1, newRow);
+        
+        return form;
+    }
+
     public void createAlert(String title, String header, String message) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle(title);
