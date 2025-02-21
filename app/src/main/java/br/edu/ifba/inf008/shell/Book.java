@@ -1,6 +1,7 @@
 package br.edu.ifba.inf008.shell;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import br.edu.ifba.inf008.interfaces.IBook;
 
@@ -10,6 +11,7 @@ public class Book implements IBook, Serializable{
     private int year;
     private String isbn;
     private String gender;
+    private Date loanDate;
     private Boolean availability = true;
 
     public Book(String title, String author, int year, String isbn, String gender){
@@ -18,6 +20,10 @@ public class Book implements IBook, Serializable{
         this.year = year;
         this.isbn = isbn;
         this.gender = gender;
+    }
+
+    public void setLoanDate(Date loanDate){
+        this.loanDate = loanDate;
     }
 
     public Boolean isAvailable(){

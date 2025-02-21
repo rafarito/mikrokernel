@@ -1,6 +1,7 @@
 package br.edu.ifba.inf008.shell;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -32,15 +33,14 @@ public class UserController implements IUserController, Serializable{
         AllUsers.put(name, user);
     }
 
-    public void borrowBook(String userName, String title) throws Exception {
+    public void borrowBook(String userName, String title, Date loanDate) throws Exception {
         IUser user = AllUsers.get(userName);
         
         if(user == null){
             throw new Exception("User not found");
         }
 
-        bookController.reserveBook(title);
-        user.addBook(bookController.reserveBook(title));
+        user.addBook(bookController.reserveBook(title, loanDate));
     }
 
     public void returnBook(String userName, int reserveId) throws Exception{

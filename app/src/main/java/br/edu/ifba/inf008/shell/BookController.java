@@ -2,6 +2,7 @@ package br.edu.ifba.inf008.shell;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class BookController implements IBookController, Serializable{
         return book;
     }
 
-    public int reserveBook(String title) throws Exception {
+    public int reserveBook(String title, Date loanDate) throws Exception {
         IBook book = allbooks.get(title);
 
         if(book == null || !book.isAvailable()){
@@ -67,6 +68,7 @@ public class BookController implements IBookController, Serializable{
 
         reservedBooks.put(reserveId, book);
         book.reserve();
+        book.setLoanDate(loanDate);
 
         return reserveId;
     }
@@ -80,6 +82,7 @@ public class BookController implements IBookController, Serializable{
 
         reservedBooks.remove(reserveId);
         book.unreserve();
+        book.setLoanDate(null);
     }
 
     public List<List<String>> toFieldList(){
