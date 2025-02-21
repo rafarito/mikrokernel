@@ -23,21 +23,7 @@ public class UserPlugin implements IPlugin
                 registerUser();
             }
         });
-        MenuItem borrowBookItem = uiController.createMenuItem("User", "Borrow book");
-        borrowBookItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                // uiController.createMenuItem("User", "User registered");
-            }
-        });
-        MenuItem returnBookItem = uiController.createMenuItem("User", "Return book");
-        returnBookItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                // uiController.createMenuItem("User", "User registered");
-            }
-        });
-
+        
         return true;
     }
 
