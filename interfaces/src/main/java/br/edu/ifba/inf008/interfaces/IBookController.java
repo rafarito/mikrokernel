@@ -10,4 +10,5 @@ public interface IBookController {
     public void unreserveBook(int reserveId) throws Exception;
     public List<List<String>> toFieldList();
     public List<List<String>> searchBooksBySubstring(String substring);
+    public IBook searchReservedBook(int reserveId);
 }

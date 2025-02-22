@@ -57,4 +57,7 @@ public class Book implements IBook, Serializable{
     public String getGender() {
         return gender;
     }
+    public Date getLoanDate(){
+        return loanDate;
+    }
 }

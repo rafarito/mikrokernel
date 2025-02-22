@@ -11,5 +11,6 @@ public interface IBook {
     public int getYear();
     public String getIsbn();
     public String getGender();
+    public Date getLoanDate();
     public void setLoanDate(Date loanDate);
 }

@@ -10,12 +10,12 @@ public class User implements IUser, Serializable {
     private static int idCounter = 0;
     private int id;
     private String name;
-    private List<Integer> AlocatedBooks;
+    private List<Integer> alocatedBooks;
 
     public User(String name) {
         this.id = idCounter++;
         this.name = name;
-        AlocatedBooks = new ArrayList<Integer>(5);
+        alocatedBooks = new ArrayList<Integer>(5);
     }
 
     public static void setIdCounter(int idCounter) {
@@ -26,10 +26,18 @@ public class User implements IUser, Serializable {
         return idCounter;
     }
 
+    public String getUsername() {
+        return name;
+    }
+
+    public List<Integer> getalocatedBooks(){
+        return alocatedBooks;
+    }
+
     @Override
     public void addBook(int reserveId) throws Exception {
-        if (AlocatedBooks.size() < 5) {
-            AlocatedBooks.add(reserveId);
+        if (alocatedBooks.size() < 5) {
+            alocatedBooks.add(reserveId);
         } else {
             throw new Exception("User already has 5 books allocated");
         }
@@ -37,8 +45,8 @@ public class User implements IUser, Serializable {
     
     @Override
     public void removeBook(int reserveId) throws Exception {
-        if (AlocatedBooks.contains(reserveId)) {
-            AlocatedBooks.remove(reserveId);
+        if (alocatedBooks.contains(reserveId)) {
+            alocatedBooks.remove(reserveId);
         } else {
             throw new Exception("User does not have this book allocated");
         }

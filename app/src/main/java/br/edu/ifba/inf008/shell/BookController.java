@@ -51,6 +51,12 @@ public class BookController implements IBookController, Serializable{
         return book;
     }
 
+    public IBook searchReservedBook(int reserveId){
+        IBook book = reservedBooks.get(reserveId);
+
+        return book;
+    }
+
     public int reserveBook(String title, Date loanDate) throws Exception {
         IBook book = allbooks.get(title);
 
