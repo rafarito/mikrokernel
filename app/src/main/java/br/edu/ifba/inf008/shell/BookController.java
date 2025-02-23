@@ -54,10 +54,6 @@ public class BookController implements IBookController, Serializable{
     public IBook searchReservedBook(int reserveId){
         IBook book = reservedBooks.get(reserveId);
 
-        // if(book == null){
-        //     throw new UnsupportedOperationException("Book not found");
-        // }
-
         return book;
     }
 
