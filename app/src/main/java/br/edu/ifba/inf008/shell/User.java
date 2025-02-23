@@ -46,7 +46,7 @@ public class User implements IUser, Serializable {
     @Override
     public void removeBook(int reserveId) throws Exception {
         if (alocatedBooks.contains(reserveId)) {
-            alocatedBooks.remove(reserveId);
+            alocatedBooks.remove(alocatedBooks.indexOf(reserveId));
         } else {
             throw new Exception("User does not have this book allocated");
         }

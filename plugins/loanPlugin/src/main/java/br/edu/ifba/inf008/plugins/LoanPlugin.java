@@ -34,7 +34,7 @@ public class LoanPlugin implements IPlugin
         returnBookItem.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                // uiController.createMenuItem("User", "User registered");
+                returnBook();
             }
         });
 
