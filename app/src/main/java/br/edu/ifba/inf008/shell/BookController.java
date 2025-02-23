@@ -1,6 +1,7 @@
 package br.edu.ifba.inf008.shell;
 
 import java.io.Serializable;
+import java.util.Map.Entry;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -104,6 +105,24 @@ public class BookController implements IBookController, Serializable{
             bookData.add(book.getIsbn());
             bookData.add(Integer.toString(book.getYear()));
             bookData.add(book.getGender());
+
+            books.add(bookData);
+        }
+
+        return books;
+    }
+
+    public List<List<String>> reservedsToFieldList(){
+        List<List<String>> books = new ArrayList<List<String>>();
+
+        for(Entry<Integer, IBook> book : reservedBooks.entrySet()){
+            List<String> bookData = new ArrayList<String>();
+            bookData.add(Integer.toString(book.getKey()));
+            bookData.add(book.getValue().getTitle());
+            bookData.add(book.getValue().getAuthor());
+            bookData.add(book.getValue().getIsbn());
+            bookData.add(Integer.toString(book.getValue().getYear()));
+            bookData.add(book.getValue().getGender());
 
             books.add(bookData);
         }
