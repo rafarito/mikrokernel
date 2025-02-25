@@ -27,13 +27,13 @@ public class PluginController implements IPluginController
             URL[] jars = new URL[plugins.length];
             for (i = 0; i < plugins.length; i++)
             {
-                jars[i] = (new File("./plugins/" + plugins[i])).toURL();
+                jars[i] = (new File("./plugins/" + plugins[i])).toURI().toURL();
             }
             URLClassLoader ulc = new URLClassLoader(jars, App.class.getClassLoader());
             for (i = 0; i < plugins.length; i++)
             {
                 String pluginName = plugins[i].split("\\.")[0];
-                IPlugin plugin = (IPlugin) Class.forName("br.edu.ifba.inf008.plugins." + pluginName, true, ulc).newInstance();
+                IPlugin plugin = (IPlugin) Class.forName("br.edu.ifba.inf008.plugins." + pluginName, true, ulc).getDeclaredConstructor().newInstance();
                 plugin.init();
             }
 
