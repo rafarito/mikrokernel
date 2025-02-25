@@ -20,30 +20,28 @@ public class Core extends ICore
     public IUIController getUIController() {
         return UIController.getInstance();
     }
-    public IAuthenticationController getAuthenticationController() {
-        if (authenticationController == null) {
-            authenticationController = new AuthenticationController();
-        }
-        return authenticationController;
-    }
+
     public IIOController getIOController() {
         if(ioController == null) {
             ioController = new IOController();
         }
         return ioController;
     }
+
     public IPluginController getPluginController() {
         if(pluginController == null) {
             pluginController = new PluginController();
         }
         return pluginController;
     }
+
     public IBookController getBookController() {
         if(bookController == null) {
             bookController = new BookController();
         }
         return bookController;
     }
+
     public IUserController getUserController() {
         if(userController == null) {
             userController = new UserController();
@@ -51,7 +49,6 @@ public class Core extends ICore
         return userController;
     }
 
-    private IAuthenticationController authenticationController;
     private IIOController ioController;
     private IPluginController pluginController;
     private IBookController bookController;
