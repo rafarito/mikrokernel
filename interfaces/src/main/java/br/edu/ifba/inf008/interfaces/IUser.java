@@ -7,4 +7,5 @@ public interface IUser {
     public void removeBook(int reserveId) throws Exception;
     public List<Integer> getalocatedBooks();
     public String getUsername();
+    public int getId();
 }

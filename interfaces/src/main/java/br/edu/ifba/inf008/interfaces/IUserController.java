@@ -8,4 +8,5 @@ public interface IUserController {
     public void borrowBook(String userName, String title, Date loanDate) throws Exception;
     public void returnBook(String userName, int reserveId) throws Exception;
     public List<List<String>> searchLoanByUser(String userName);
+    public List<List<String>> listUsers();
 }

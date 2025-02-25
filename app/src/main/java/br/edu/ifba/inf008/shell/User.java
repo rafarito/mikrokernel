@@ -18,6 +18,10 @@ public class User implements IUser, Serializable {
         alocatedBooks = new ArrayList<Integer>(5);
     }
 
+    public int getId() {
+        return id;
+    }
+
     public static void setIdCounter(int idCounter) {
         User.idCounter = idCounter;
     }

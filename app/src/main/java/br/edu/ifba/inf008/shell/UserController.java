@@ -81,4 +81,17 @@ public class UserController implements IUserController, Serializable{
 
         return alocatedBooks;
     }
+
+    public List<List<String>> listUsers() {
+        List<List<String>> users = new ArrayList<List<String>>();
+        
+        for (IUser user : allUsers.values()) {
+            List<String> userInfo = new ArrayList<String>();
+            userInfo.add(Integer.toString(user.getId()));
+            userInfo.add(user.getUsername());
+            users.add(userInfo);
+        }
+
+        return users;
+    }
 }
