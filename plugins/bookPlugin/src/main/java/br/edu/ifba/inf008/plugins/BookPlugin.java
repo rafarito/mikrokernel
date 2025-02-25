@@ -41,13 +41,6 @@ public class BookPlugin implements IPlugin
                 listBooks();
             }
         });
-        MenuItem returnBookItem = uiController.createMenuItem("Book", "Return book");
-        returnBookItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                // uiController.createMenuItem("Book", "Book registered");
-            }
-        });
 
         return true;
     }

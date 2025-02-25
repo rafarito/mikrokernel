@@ -14,7 +14,8 @@
         <module>plugins/userPlugin</module>
         <module>plugins/bookPlugin</module>
         <module>plugins/loanPlugin</module>
-        <module>plugins\reservedBooksPluginReport</module>
+        <module>plugins/reservedBooksPluginReport</module>
+        <module>plugins/lateBooksPluginReport</module>
     </modules>
 
     <properties>
