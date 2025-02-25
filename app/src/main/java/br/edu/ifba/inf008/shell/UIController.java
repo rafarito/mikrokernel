@@ -61,15 +61,12 @@ public class UIController extends Application implements IUIController
         tabPane = new TabPane();
         tabPane.setSide(Side.BOTTOM);
 
-        // Create a welcome message Label
         Label welcomeLabel = new Label("Welcome to the library system");
         welcomeLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: gray;");
         
-        // Create a container for both the TabPane and the welcome message
         StackPane centerPane = new StackPane();
         centerPane.getChildren().addAll(welcomeLabel, tabPane);
         
-        // Bind the visibility: show welcomeLabel when there are no tabs, otherwise show the tabPane
         welcomeLabel.visibleProperty().bind(Bindings.isEmpty(tabPane.getTabs()));
         tabPane.visibleProperty().bind(Bindings.isNotEmpty(tabPane.getTabs()));
 
