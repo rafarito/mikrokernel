@@ -1,38 +1,39 @@
 package br.edu.ifba.inf008.shell;
 
-import br.edu.ifba.inf008.interfaces.IUIController;
-
 import java.util.List;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import br.edu.ifba.inf008.interfaces.IUIController;
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tab;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class UIController extends Application implements IUIController
 {
@@ -55,20 +56,31 @@ public class UIController extends Application implements IUIController
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Library System");
-    
+
         menuBar = new MenuBar();
-    
         tabPane = new TabPane();
         tabPane.setSide(Side.BOTTOM);
-    
+
+        // Create a welcome message Label
+        Label welcomeLabel = new Label("Welcome to the library system");
+        welcomeLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: gray;");
+        
+        // Create a container for both the TabPane and the welcome message
+        StackPane centerPane = new StackPane();
+        centerPane.getChildren().addAll(welcomeLabel, tabPane);
+        
+        // Bind the visibility: show welcomeLabel when there are no tabs, otherwise show the tabPane
+        welcomeLabel.visibleProperty().bind(Bindings.isEmpty(tabPane.getTabs()));
+        tabPane.visibleProperty().bind(Bindings.isNotEmpty(tabPane.getTabs()));
+
         BorderPane borderPane = new BorderPane();
         borderPane.setTop(menuBar);
-        borderPane.setCenter(tabPane);
-    
+        borderPane.setCenter(centerPane);
+
         Scene scene = new Scene(borderPane, 960, 600);
         primaryStage.setScene(scene);
         primaryStage.show();
-    
+
         Core.getInstance().getIOController().readAllPreviousData();
         Core.getInstance().getPluginController().init();
     }
